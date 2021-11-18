@@ -1,5 +1,5 @@
 {
-    "name": "calibrate/be.calibrate.logger",
+    "name": "kewljuice/be.calibrate.logger",
     "description": "Everything functionally related to CiviCRM error logging through the Calibrate Logger.",
     "type": "civicrm-extension",
     "require": {
