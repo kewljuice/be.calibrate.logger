@@ -1,0 +1,6 @@
+{
+    "name": "calibrate/be.calibrate.logger",
+    "require": {
+        "monolog/monolog": "^2.0"
+    }
+}
