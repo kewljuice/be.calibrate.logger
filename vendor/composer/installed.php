@@ -2,10 +2,10 @@
     'root' => array(
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'type' => 'library',
+        'type' => 'civicrm-extension',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8ae7cb312ae87a2697bbf0a5b61a8c01e8fab76e',
+        'reference' => '58c0cc269be100c803d45bd5d570d68cf00e87a2',
         'name' => 'calibrate/be.calibrate.logger',
         'dev' => true,
     ),
@@ -13,10 +13,10 @@
         'calibrate/be.calibrate.logger' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'type' => 'library',
+            'type' => 'civicrm-extension',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8ae7cb312ae87a2697bbf0a5b61a8c01e8fab76e',
+            'reference' => '58c0cc269be100c803d45bd5d570d68cf00e87a2',
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
