@@ -9,3 +9,7 @@ The extension is licensed under [AGPL-3.0](LICENSE.txt).
 ![Manage configuration](images/screenshot1.png?raw=true)
 
 - Manage config: **yoursite.org/civicrm/logger/settings**.
+
+## Test severity levels
+
+- Go to: **yoursite.org/civicrm/logger/test**.

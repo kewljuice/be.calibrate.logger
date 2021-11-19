@@ -10,6 +10,10 @@ use CRM_Monolog_ExtensionUtil as E;
  */
 function logger_civicrm_config(&$config) {
   _logger_civix_civicrm_config($config);
+  $extRoot = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+  $include_path = $extRoot . DIRECTORY_SEPARATOR . 'vendor' . PATH_SEPARATOR . get_include_path( );
+  set_include_path( $include_path );
+  require_once 'vendor/autoload.php';
 }
 
 /**

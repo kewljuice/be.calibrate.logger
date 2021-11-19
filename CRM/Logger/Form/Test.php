@@ -5,59 +5,45 @@ use CRM_Logger_ExtensionUtil as E;
 /**
  * Form controller class
  *
- * @see https://wiki.civicrm.org/confluence/display/CRMDOC/QuickForm+Reference
+ * @see https://docs.civicrm.org/dev/en/latest/framework/quickform/
  */
-class CRM_Logger_Form_Settings extends CRM_Core_Form {
+class CRM_Logger_Form_Test extends CRM_Core_Form {
 
   public function buildQuickForm() {
-    $defaults = Civi::settings()->get('logger-settings');
-    if ($defaults != NULL) {
-      $values = json_decode(utf8_decode($defaults), TRUE);
-    }
-    else {
-      $values = [];
-      $values['logger_severity_limit'] = NULL;
-    }
 
     // Set severity log limit
     $oClass = new ReflectionClass('Psr\Log\LogLevel');
     $levels = $oClass->getConstants();
 
-    $select = $this->add(
+    $this->add(
       'select',
       'logger_severity_limit',
-      'Severity level to log from',
+      'Severity level',
       $levels,
       TRUE
     );
-    $select->setSelected(($values['logger_severity_limit'] !== NULL) ?: 'DEBUG');
 
-    $this->addButtons(array(
-      array(
+    $this->addButtons([
+      [
         'type' => 'submit',
-        'name' => E::ts('Submit'),
+        'name' => E::ts('Test'),
         'isDefault' => TRUE,
-      ),
-    ));
+      ],
+    ]);
 
+    // export form elements
     $this->assign('elementNames', $this->getRenderableElementNames());
     parent::buildQuickForm();
   }
 
-  /**
-   * Save the settings form.
-   */
   public function postProcess() {
-    // Get the submitted values as an array
-    $values = $this->controller->exportValues($this->_name);
-    $credentials['logger_severity_limit'] = $values['logger_severity_limit'];
-    $encode = json_encode($credentials);
-    try {
-      Civi::settings()->set('logger-settings', $encode);
-    } catch (Exception $e) {
-      \Civi::log()
-        ->debug("CRM_Logger_Form_Settings Error: " . $e->getMessage());
-    }
+    $values = $this->exportValues();
+    $level = $values['logger_severity_limit'];
+    CRM_Core_Session::setStatus(E::ts('You picked Severity level "%1"', [
+      1 => $level,
+    ]));
+    \Civi::log()->{$level}("Executed test for be.calibrate.logger extension.");
+    parent::postProcess();
   }
 
   /**
@@ -70,7 +56,7 @@ class CRM_Logger_Form_Settings extends CRM_Core_Form {
     // auto-rendered in the loop -- such as "qfKey" and "buttons".  These
     // items don't have labels.  We'll identify renderable by filtering on
     // the 'label'.
-    $elementNames = array();
+    $elementNames = [];
     foreach ($this->_elements as $element) {
       /** @var HTML_QuickForm_Element $element */
       $label = $element->getLabel();
